@@ -53,7 +53,15 @@ inline void file_to_graph(const string& filename, Graph& G) {
 }
 */
 
-class Compare { public: bool operator()(Edge a, Edge b) { return a.weight > b.weight; } };
+
+class Compare { 
+
+
+    public: 
+
+        bool operator()(pair<int, int> a, pair<int, int> b) { return a.first > b.first; } 
+
+};
 
 
 vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& previous){
@@ -65,15 +73,14 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
     vector<bool> visited(size, false);
     //vector<int> previousVer(size, -1);
 
-    priority_queue<Edge, vector<Edge>, Compare> pq;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, Compare> pq;
+    pq.push({0, source});
 
-    for (Edge edg : G[source]) pq.push(edg);
 
     while (!pq.empty()){
-        Edge currentEdge = pq.top();
+        int currentDistance = pq.top().first;
+        int currentVertex = pq.top().second;
         pq.pop();
-
-        int currentVertex = currentEdge.src;
 
         if (visited[currentVertex]) continue;
 
@@ -86,7 +93,7 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
             if (!visited[neighborVertex] && (distances[currentVertex] + neighborWeight < distances[neighborVertex])){
                 distances[neighborVertex] = distances[currentVertex] + neighborWeight;
                 previous[neighborVertex] = currentVertex;
-                pq.push(neighbor);
+                pq.push({distances[neighborVertex], neighborVertex});
             }
         }
     }
