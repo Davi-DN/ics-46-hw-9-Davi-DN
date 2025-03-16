@@ -31,6 +31,8 @@ int main(int argc, char *argv[]) {
     cout << (is_adjacent("mom", "m") ? "true" : "false") << endl; // F
     cout << (is_adjacent("dad", "daddd") ? "true" : "false") << endl; // F
 
+    print_word_ladder({});
+
 }
 
 // g++ ./src/ladder_main.cpp ./src/ladder.cpp -o main2 -std=c++20
