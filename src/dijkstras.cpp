@@ -54,14 +54,7 @@ inline void file_to_graph(const string& filename, Graph& G) {
 */
 
 
-class Compare { 
-
-
-    public: 
-
-        bool operator()(pair<int, int> a, pair<int, int> b) { return a.first > b.first; } 
-
-};
+class Compare { public: bool operator()(pair<int, int> a, pair<int, int> b) { return a.first > b.first; } };
 
 
 vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& previous){
@@ -75,7 +68,6 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
     priority_queue<pair<int, int>, vector<pair<int, int>>, Compare> pq;
     pq.push({0, source});
 
-
     while (!pq.empty()){
         int currentDistance = pq.top().first;
         int currentVertex = pq.top().second;
@@ -88,7 +80,7 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
         for (Edge neighbor : G[currentVertex]){
             int neighborWeight = neighbor.weight;
             int neighborVertex = neighbor.dst;
-            
+
             if (!visited[neighborVertex] && (distances[currentVertex] + neighborWeight < distances[neighborVertex])){
                 distances[neighborVertex] = distances[currentVertex] + neighborWeight;
                 previous[neighborVertex] = currentVertex;
@@ -98,29 +90,6 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
     } 
     return distances;
 }
-/*
-    n = graph.adjacencyList.size()
-    graph.distance.resize(n, INT_MAX)
-    graph.previous.resize(n, -1)
-    graph.visited.resize(n, false)
-    priorityQueue pq
-    pq.push(Node(source, 0))
-    graph.distance[source] = 0
-    while !pq.empty():
-        current = pq.pop_top()
-        u = current.vertex
-        if graph.visited[u]:
-            continue
-        graph.visited[u] = true
-        for each neighbor in graph.adjacencyList[u]:
-            v = neighbor.vertex
-            weight = neighbor.weight
-            if !graph.visited[v] and graph.distance[u] + weight < graph.distance[v]:
-                graph.distance[v] = graph.distance[u] + weight
-                graph.previous[v] = u
-                pq.push(Node(v, graph.distance[v]))
-end function
-*/
 
 vector<int> extract_shortest_path(const vector<int>& /*distances*/, const vector<int>& previous, int destination){
     vector<int> path;
@@ -131,6 +100,5 @@ vector<int> extract_shortest_path(const vector<int>& /*distances*/, const vector
 
 void print_path(const vector<int>& v, int total){
     for (int i : v) { cout << i << " "; }
-    
     cout << endl << "Total cost is " << total << endl;
 }
