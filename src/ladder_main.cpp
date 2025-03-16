@@ -34,5 +34,3 @@ int main(int argc, char *argv[]) {
     print_word_ladder({});
 
 }
-
-// g++ ./src/ladder_main.cpp ./src/ladder.cpp -o main2 -std=c++20

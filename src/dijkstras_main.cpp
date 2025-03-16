@@ -31,6 +31,3 @@ int main(int argc, char *argv[]) {
 
     }
 }
-// g++ ./src/dijkstras_main.cpp ./src/dijkstras.cpp -o main -std=c++20
-
-// valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./main
