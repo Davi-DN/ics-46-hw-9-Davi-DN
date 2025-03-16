@@ -71,7 +71,6 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
     previous.assign(size, -1);
 
     vector<bool> visited(size, false);
-    //vector<int> previousVer(size, -1);
 
     priority_queue<pair<int, int>, vector<pair<int, int>>, Compare> pq;
     pq.push({0, source});
@@ -87,16 +86,16 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
         visited[currentVertex] = true;
 
         for (Edge neighbor : G[currentVertex]){
-           int neighborWeight = neighbor.weight;
-           int neighborVertex = neighbor.src;
-
+            int neighborWeight = neighbor.weight;
+            int neighborVertex = neighbor.dst;
+            
             if (!visited[neighborVertex] && (distances[currentVertex] + neighborWeight < distances[neighborVertex])){
                 distances[neighborVertex] = distances[currentVertex] + neighborWeight;
                 previous[neighborVertex] = currentVertex;
                 pq.push({distances[neighborVertex], neighborVertex});
             }
         }
-    }
+    } 
     return distances;
 }
 /*
