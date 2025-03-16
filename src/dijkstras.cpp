@@ -53,7 +53,7 @@ inline void file_to_graph(const string& filename, Graph& G) {
 }
 */
 
-class Compare { public: bool operator()(Edge a, Edge b) { return a.weight < b.weight; } };
+class Compare { public: bool operator()(Edge a, Edge b) { return a.weight > b.weight; } };
 
 
 vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& previous){
