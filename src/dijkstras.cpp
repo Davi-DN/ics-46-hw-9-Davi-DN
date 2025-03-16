@@ -62,15 +62,14 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
     vector<int> distances(size, INF);
     distances[source] = 0;
     previous.assign(size, -1);
-
     vector<bool> visited(size, false);
 
     priority_queue<pair<int, int>, vector<pair<int, int>>, Compare> pq;
     pq.push({0, source});
 
     while (!pq.empty()){
-        int currentDistance = pq.top().first;
         int currentVertex = pq.top().second;
+
         pq.pop();
 
         if (visited[currentVertex]) continue;
@@ -93,7 +92,7 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
 
 vector<int> extract_shortest_path(const vector<int>& /*distances*/, const vector<int>& previous, int destination){
     vector<int> path;
-    for (int curr = destination; curr != -1; previous[curr]) path.push_back(curr);
+    for (int curr = destination; curr != -1; curr = previous[curr]) path.push_back(curr);
     reverse(path.begin(), path.end());
     return path;
 }
